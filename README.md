@@ -1,6 +1,6 @@
-# Deep learning GPU development environment
+# Deep learning development environment
 
-A ready-to-use deep learning environment with NVIDIA GPU support for VS Code. Includes both **PyTorch** and **TensorFlow** frameworks. Designed for cross-platform support and wide GPU compatibility.
+A ready-to-use deep learning environment for VS Code, designed to give AI/ML bootcamp students a consistent development environment regardless of their hardware. Includes both **PyTorch** and **TensorFlow** frameworks, with two devcontainer configurations for wide hardware compatibility: a **GPU** version with NVIDIA CUDA support and a **CPU** version for machines without a compatible GPU.
 
 ## What's included
 
@@ -11,16 +11,17 @@ A ready-to-use deep learning environment with NVIDIA GPU support for VS Code. In
 | **Python** | Python 3.10, NumPy 1.24, Pandas 2.2, Matplotlib 3.10 |
 | **Tools** | JupyterLab, TensorBoard, Optuna |
 
-Based on [NVIDIA's TensorFlow 24.06 container](https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-24-06.html).
-
-> **No NVIDIA GPU?** Use the CPU version instead: [gperdrizet/deeplearning-CPU](https://github.com/gperdrizet/deeplearning-CPU)
+The GPU configuration is based on [NVIDIA's TensorFlow 24.06 container](https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-24-06.html). The CPU configuration is based on [Google's official TensorFlow 2.16 image](https://hub.docker.com/r/tensorflow/tensorflow/tags?name=2.16.1).
 
 ## Project structure
 
 ```
-tensorflow-GPU/
+deeplearning-devcontainer/
 ├── .devcontainer/
-│   └── devcontainer.json       # Dev container configuration
+│   ├── gpu/
+│   │   └── devcontainer.json   # GPU dev container configuration
+│   └── cpu/
+│       └── devcontainer.json   # CPU dev container configuration
 ├── data/                       # Store datasets here
 ├── logs/                       # TensorBoard logs
 ├── models/                     # Saved model files
@@ -34,11 +35,14 @@ tensorflow-GPU/
 
 ## Requirements
 
-- **NVIDIA GPU** (Pascal or newer) with driver ≥545
-- **Docker** with GPU support ([Windows](https://docs.docker.com/desktop/setup/install/windows-install) | [Linux](https://docs.docker.com/desktop/setup/install/linux))
+- **Docker** ([Windows](https://docs.docker.com/desktop/setup/install/windows-install) | [Linux](https://docs.docker.com/desktop/setup/install/linux))
 - **VS Code** with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-> **Linux users:** Also install the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+### GPU configuration (additional requirements)
+
+- **NVIDIA GPU** (Pascal or newer) with driver ≥545
+- **NVIDIA Container Toolkit** (Linux): [install guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+- Docker configured with GPU support
 
 ### GPU compatibility
 
@@ -66,12 +70,14 @@ To quickly try the container environment out on your system do the following. If
 
 2. **Clone** your fork:
    ```bash
-   git clone https://github.com/<your-username>/deeplearning-GPU.git
+   git clone https://github.com/<your-username>/deeplearning-devcontainer.git
    ```
 
 3. **Open VS Code**
 
-4. **Open Folder in Container** from the VS Code command pallet (Ctrl+shift+p), start typing `Open Folder in`...
+4. **Open Folder in Container** from the VS Code command palette (`Ctrl+Shift+P`), start typing `Open Folder in`...
+
+   > VS Code will prompt you to choose a devcontainer configuration. Select **DeepLearning GPU** if your machine has a compatible NVIDIA GPU, or **DeepLearning CPU** otherwise.
 
 5. **Verify** by running `notebooks/environment_test.ipynb`
 
@@ -126,7 +132,7 @@ For persistent packages that survive container rebuilds:
    plotly
    ```
 
-2. **Update** `.devcontainer/devcontainer.json` to install packages on container creation by adding a `postCreateCommand`:
+2. **Update** the appropriate `.devcontainer/gpu/devcontainer.json` or `.devcontainer/cpu/devcontainer.json` to install packages on container creation by adding a `postCreateCommand`:
    ```json
    "postCreateCommand": "pip install -r requirements.txt"
    ```
