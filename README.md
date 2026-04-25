@@ -7,8 +7,8 @@ A ready-to-use deep learning environment for VS Code, designed to give AI/ML boo
 | Category | Versions |
 |----------|----------|
 | **GPU** | CUDA 12.8, cuDNN 9.7 |
-| **ML** | PyTorch 2.10, TensorFlow 2.17, Keras 3.3, Scikit-learn 1.4 |
-| **Python** | Python 3.10, NumPy 1.24, Pandas 2.2, Matplotlib 3.10 |
+| **ML** | PyTorch 2.11, TensorFlow 2.17, Keras 3.3, Scikit-learn 1.5 |
+| **Python** | Python 3.12, NumPy 1.26, Pandas 2.2, Matplotlib 3.10 |
 | **Tools** | JupyterLab, TensorBoard, Optuna |
 
 The GPU configuration is based on [NVIDIA's TensorFlow 25.02 container](https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-25-02.html). The CPU configuration is based on [Google's official TensorFlow 2.16 image](https://hub.docker.com/r/tensorflow/tensorflow/tags?name=2.16.1).
