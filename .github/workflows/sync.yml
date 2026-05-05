@@ -1,0 +1,25 @@
+name: Sync version tag
+
+on:
+  repository_dispatch:
+    types: [docker-images-release]
+
+jobs:
+  tag:
+    name: Create matching release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create version tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
+          gh release create "v$VERSION" \
+            --title "v$VERSION" \
+            --notes "Synced with [docker-images v$VERSION](https://github.com/gperdrizet/docker-images/releases/tag/v$VERSION)"
