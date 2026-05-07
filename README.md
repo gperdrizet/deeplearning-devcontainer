@@ -1,5 +1,13 @@
 # Deep learning development environment
 
+[![Sync release](https://github.com/gperdrizet/deeplearning-devcontainer/actions/workflows/sync-release.yml/badge.svg)](https://github.com/gperdrizet/deeplearning-devcontainer/actions/workflows/sync-release.yml)
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.11.0-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.17-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![CUDA](https://img.shields.io/badge/CUDA-12.8-76B900?logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-toolkit)
+[![Docker Pulls deeplearning-nvidia](https://img.shields.io/docker/pulls/gperdrizet/deeplearning-nvidia?label=deeplearning-nvidia&logo=docker)](https://hub.docker.com/r/gperdrizet/deeplearning-nvidia)
+[![Docker Pulls deeplearning-cpu](https://img.shields.io/docker/pulls/gperdrizet/deeplearning-cpu?label=deeplearning-cpu&logo=docker)](https://hub.docker.com/r/gperdrizet/deeplearning-cpu)
+
 A ready-to-use deep learning environment for VS Code, designed to give AI/ML bootcamp students a consistent development environment regardless of their hardware. Includes both **PyTorch** and **TensorFlow** frameworks, with two devcontainer configurations for wide hardware compatibility: a **GPU** version with NVIDIA CUDA support and a **CPU** version for machines without a compatible GPU.
 
 ## What's included
