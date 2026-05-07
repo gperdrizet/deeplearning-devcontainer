@@ -11,7 +11,7 @@ A ready-to-use deep learning environment for VS Code, designed to give AI/ML boo
 | **Python** | Python 3.12, NumPy 1.26, Pandas 2.2, Matplotlib 3.10 |
 | **Tools** | JupyterLab, TensorBoard, Optuna |
 
-The GPU configuration is based on [NVIDIA's TensorFlow 25.02 container](https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-25-02.html). The CPU configuration is based on [Google's official TensorFlow 2.16 image](https://hub.docker.com/r/tensorflow/tensorflow/tags?name=2.16.1).
+The GPU configuration is based on [NVIDIA's TensorFlow 25.02 container](https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-25-02.html). The CPU configuration uses `python:3.12-slim` with TensorFlow and PyTorch installed via pip.
 
 ## Project structure
 
@@ -40,7 +40,7 @@ deeplearning-devcontainer/
 
 ### GPU configuration (additional requirements)
 
-- **NVIDIA GPU** (Pascal or newer) with driver ≥545
+- **NVIDIA GPU** (Pascal or newer) with driver ≥570
 - **NVIDIA Container Toolkit** (Linux): [install guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 - Docker configured with GPU support
 
@@ -161,7 +161,7 @@ Access the Optuna dashboard by right clicking on your Optuna database file and s
 
 ```bash
 # Add upstream (once)
-git remote add upstream https://github.com/gperdrizet/deeplearning-GPU.git
+git remote add upstream https://github.com/gperdrizet/deeplearning-devcontainer.git
 
 # Sync
 git fetch upstream
@@ -174,6 +174,6 @@ git merge upstream/main
 |---------|----------|
 | Docker won't start | Enable virtualization in BIOS |
 | Permission denied (Linux) | Add user to docker group, then log out/in |
-| GPU not detected | Update NVIDIA drivers (≥545) |
+| GPU not detected | Update NVIDIA drivers (≥570) |
 | Container build fails | Check internet connection |
 

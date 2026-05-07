@@ -1,10 +1,9 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	// Container definition for TensorFlow development environment
-	// Based on Google's official TensorFlow 2.16 image
+	// Container definition for deeplearning development environment (CPU)
+	// Based on python:3.12-slim with TensorFlow and PyTorch installed via pip
 	// See here: https://hub.docker.com/r/gperdrizet/deeplearning-cpu
-    // And here: https://hub.docker.com/r/tensorflow/tensorflow/tags?name=2.16.1
 	"name": "DeepLearning CPU",
 	"image": "gperdrizet/deeplearning-cpu",
     "runArgs": [

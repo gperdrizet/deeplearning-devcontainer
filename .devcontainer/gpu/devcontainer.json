@@ -2,11 +2,11 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
 	// Container definition for deeplearning development environment
-	// Based on NVIDIA's official TensorFlow 24.06 image with GPU support
-	// See here: https://hub.docker.com/r/gperdrizet/deeplearning-gpu
-    // And here: https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-24-06.html
-	"name": "DeepLearning GPU",
-	"image": "gperdrizet/deeplearning-gpu",
+	// Based on NVIDIA's official TensorFlow 25.02 image with GPU support
+	// See here: https://hub.docker.com/r/gperdrizet/deeplearning-nvidia
+    // And here: https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-25-02.html
+	"name": "DeepLearning NVIDIA",
+	"image": "gperdrizet/deeplearning-nvidia",
     "runArgs": [
 		"--gpus", "all",              // Enable all available GPUs in the container
 		"--pid=host",                 // Use host PIDs, needed for nvidia-smi process list
