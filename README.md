@@ -130,7 +130,7 @@ pip install <package-name>
 
 > **Note:** Packages installed this way will be lost when the container is rebuilt.
 
-### Using requirements.txt (Recommended)
+### Using requirements.txt (recommended)
 
 For persistent packages that survive container rebuilds:
 
@@ -163,7 +163,7 @@ TensorBoard will open in a new tab within VS Code. Place your training logs in t
 
 Access the Optuna dashboard by right clicking on your Optuna database file and selecting 'Open in Optuna Dashboard'.
 
-> Note: the default ports for TensorBoard and Optuna are published by the container, so you can also run them via their respective built in web servers and they will be avalible on the host's localhost.
+> **Note:** The default ports for TensorBoard and Optuna are published by the container, so you can also access them via their respective built-in web servers on the host's localhost.
 
 ## Keeping your fork updated
 
