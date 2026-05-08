@@ -68,7 +68,7 @@ This environment requires an NVIDIA GPU with **compute capability 6.0+** (Pascal
 
 Check your GPU's compute capability: [NVIDIA CUDA GPUs](https://developer.nvidia.com/cuda-gpus)
 
-> **Note:** This environment is configured for broad GPU compatibility, supporting Pascal and newer architectures. If you have a more recent GPU (e.g. Ada Lovelace, Hopper, or Blackwell), you may benefit from using a newer CUDA version to access the latest performance optimizations and features. Consider setting up a custom environment with an updated [NVIDIA TensorFlow container](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/tensorflow) to take full advantage of your hardware.
+> **Note:** This environment is configured for broad GPU compatibility, supporting Pascal and newer architectures. The base image (NVIDIA TensorFlow 25.02) is the final NGC TensorFlow container release. If you have a newer GPU and want to take full advantage of the latest CUDA optimizations, consider building a custom environment on top of an up-to-date [`nvidia/cuda`](https://hub.docker.com/r/nvidia/cuda) base image.
 
 ## Quick start
 
