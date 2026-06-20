@@ -35,7 +35,7 @@ The GPU configuration is based on [NVIDIA's TensorFlow 25.02 container](https://
 ```
 deeplearning-devcontainer/
 ├── .devcontainer/
-│   ├── gpu/
+│   ├── nvidia/
 │   │   └── devcontainer.json   # NVIDIA GPU dev container configuration
 │   ├── cpu/
 │   │   └── devcontainer.json   # CPU dev container configuration
