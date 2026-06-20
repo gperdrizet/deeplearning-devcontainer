@@ -13,11 +13,32 @@ A ready-to-use deep learning environment for VS Code, designed to give AI/ML boo
 
 ## What's included
 
-| Category | Versions |
-|----------|----------|
-| **GPU** | CUDA 12.8, cuDNN 9.7 |
-| **ML** | PyTorch 2.11, TensorFlow 2.17, Keras 3.3, Scikit-learn 1.5 |
-| **Python** | Python 3.12, NumPy 1.26, Pandas 2.2, Matplotlib 3.10 |
+### NVIDIA environment
+
+| Category | Details |
+|----------|---------|
+| **Base image** | `nvcr.io/nvidia/tensorflow:25.02-tf2-py3` |
+| **GPU** | CUDA 12.8, cuDNN 9.7, CuPy 13.6 |
+| **ML frameworks** | PyTorch 2.11, TensorFlow 2.17, Keras 3.3 |
+| **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
+| **Tools** | JupyterLab, TensorBoard, Optuna |
+
+### CPU environment
+
+| Category | Details |
+|----------|---------|
+| **Base image** | `python:3.12-slim` |
+| **ML frameworks** | PyTorch 2.11 (CPU), TensorFlow 2.17 |
+| **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
+| **Tools** | JupyterLab, TensorBoard, Optuna |
+
+### Mac environment
+
+| Category | Details |
+|----------|---------|
+| **Base image** | `python:3.12-slim` (linux/arm64) |
+| **ML frameworks** | PyTorch 2.11 (ARM64, from PyPI), TensorFlow 2.17 |
+| **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
 | **Tools** | JupyterLab, TensorBoard, Optuna |
 
 The GPU configuration is based on [NVIDIA's TensorFlow 25.02 container](https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-25-02.html). The CPU configuration uses `python:3.12-slim` with TensorFlow and PyTorch installed via pip. The Mac configuration uses the same `python:3.12-slim` base built for `linux/arm64`, running natively on Apple Silicon — no Rosetta emulation.
@@ -85,8 +106,6 @@ This environment requires an NVIDIA GPU with **compute capability 6.0+** (Pascal
 
 Check your GPU's compute capability: [NVIDIA CUDA GPUs](https://developer.nvidia.com/cuda-gpus)
 
-> **Note:** This environment is configured for broad GPU compatibility, supporting Pascal and newer architectures. The base image (NVIDIA TensorFlow 25.02) is the final NGC TensorFlow container release. If you have a newer GPU and want to take full advantage of the latest CUDA optimizations, consider building a custom environment on top of an up-to-date [`nvidia/cuda`](https://hub.docker.com/r/nvidia/cuda) base image.
-
 ## Quick start
 
 To quickly try the container environment out on your system do the following. If you want to use it for your own project, see below.
@@ -133,7 +152,7 @@ You can use your fork as a template to quickly create new deep learning projects
    git push
    ```
 
-Now you have a fresh deep learning GPU project with the dev container configuration ready to go!
+Now you have a fresh deep learning project with the dev container configuration ready to go!
 
 ## Adding Python packages
 
@@ -157,7 +176,7 @@ For persistent packages that survive container rebuilds:
    plotly
    ```
 
-2. **Update** the appropriate `.devcontainer/gpu/devcontainer.json` or `.devcontainer/cpu/devcontainer.json` to install packages on container creation by adding a `postCreateCommand`:
+2. **Update** the appropriate `.devcontainer/nvidia/devcontainer.json`, `.devcontainer/cpu/devcontainer.json`, or `.devcontainer/mac/devcontainer.json` to install packages on container creation by adding a `postCreateCommand`:
    ```json
    "postCreateCommand": "pip install -r requirements.txt"
    ```
@@ -199,6 +218,7 @@ git merge upstream/main
 |---------|----------|
 | Docker won't start | Enable virtualization in BIOS |
 | Permission denied (Linux) | Add user to docker group, then log out/in |
-| GPU not detected | Update NVIDIA drivers (≥570) |
+| GPU not detected | Update NVIDIA drivers (≥570), install [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) |
 | Container build fails | Check internet connection |
+| Module not found | Rebuild container after adding to requirements.txt |
 
