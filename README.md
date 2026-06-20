@@ -132,7 +132,7 @@ git fetch upstream && git merge upstream/main
 | **GPU** | CUDA 12.8, cuDNN 9.7, CuPy 13.6 |
 | **ML frameworks** | PyTorch 2.11, TensorFlow 2.17, Keras 3.3 |
 | **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
-| **Tools** | JupyterLab, TensorBoard, Optuna |
+| **Tools** | JupyterLab, TensorBoard, Optuna, Plotly, python-dotenv |
 
 ### CPU environment
 
@@ -141,7 +141,7 @@ git fetch upstream && git merge upstream/main
 | **Base image** | `python:3.12-slim` |
 | **ML frameworks** | PyTorch 2.11 (CPU), TensorFlow 2.17 |
 | **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
-| **Tools** | JupyterLab, TensorBoard, Optuna |
+| **Tools** | JupyterLab, TensorBoard, Optuna, Plotly, python-dotenv |
 
 ### Mac environment
 
@@ -150,7 +150,7 @@ git fetch upstream && git merge upstream/main
 | **Base image** | `python:3.12-slim` (linux/arm64) |
 | **ML frameworks** | PyTorch 2.11 (ARM64, from PyPI), TensorFlow 2.17 |
 | **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
-| **Tools** | JupyterLab, TensorBoard, Optuna |
+| **Tools** | JupyterLab, TensorBoard, Optuna, Plotly, python-dotenv |
 
 ## GPU compatibility (NVIDIA)
 
