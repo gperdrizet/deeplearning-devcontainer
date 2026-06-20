@@ -7,8 +7,9 @@
 [![CUDA](https://img.shields.io/badge/CUDA-12.8-76B900?logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-toolkit)
 [![Docker Pulls deeplearning-nvidia](https://img.shields.io/docker/pulls/gperdrizet/deeplearning-nvidia?label=deeplearning-nvidia&logo=docker)](https://hub.docker.com/r/gperdrizet/deeplearning-nvidia)
 [![Docker Pulls deeplearning-cpu](https://img.shields.io/docker/pulls/gperdrizet/deeplearning-cpu?label=deeplearning-cpu&logo=docker)](https://hub.docker.com/r/gperdrizet/deeplearning-cpu)
+[![Docker Pulls deeplearning-mac](https://img.shields.io/docker/pulls/gperdrizet/deeplearning-mac?label=deeplearning-mac&logo=docker)](https://hub.docker.com/r/gperdrizet/deeplearning-mac)
 
-A ready-to-use deep learning environment for VS Code, designed to give AI/ML bootcamp students a consistent development environment regardless of their hardware. Includes both **PyTorch** and **TensorFlow** frameworks, with two devcontainer configurations for wide hardware compatibility: a **GPU** version with NVIDIA CUDA support and a **CPU** version for machines without a compatible GPU.
+A ready-to-use deep learning environment for VS Code, designed to give AI/ML bootcamp students a consistent development environment regardless of their hardware. Includes both **PyTorch** and **TensorFlow** frameworks, with three devcontainer configurations for wide hardware compatibility: a **GPU** version with NVIDIA CUDA support, a **CPU** version for machines without a compatible GPU, and a **Mac** version built natively for Apple Silicon.
 
 ## What's included
 
@@ -19,7 +20,15 @@ A ready-to-use deep learning environment for VS Code, designed to give AI/ML boo
 | **Python** | Python 3.12, NumPy 1.26, Pandas 2.2, Matplotlib 3.10 |
 | **Tools** | JupyterLab, TensorBoard, Optuna |
 
-The GPU configuration is based on [NVIDIA's TensorFlow 25.02 container](https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-25-02.html). The CPU configuration uses `python:3.12-slim` with TensorFlow and PyTorch installed via pip.
+The GPU configuration is based on [NVIDIA's TensorFlow 25.02 container](https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel-25-02.html). The CPU configuration uses `python:3.12-slim` with TensorFlow and PyTorch installed via pip. The Mac configuration uses the same `python:3.12-slim` base built for `linux/arm64`, running natively on Apple Silicon — no Rosetta emulation.
+
+## Devcontainer configurations
+
+| Configuration | Image | Use when |
+|---------------|-------|----------|
+| **DeepLearning NVIDIA** | `gperdrizet/deeplearning-nvidia` | You have an NVIDIA GPU |
+| **DeepLearning CPU** | `gperdrizet/deeplearning-cpu` | CPU-only machine (any OS) |
+| **DeepLearning Mac** | `gperdrizet/deeplearning-mac` | Apple Silicon Mac (M1/M2/M3) |
 
 ## Project structure
 
@@ -27,9 +36,11 @@ The GPU configuration is based on [NVIDIA's TensorFlow 25.02 container](https://
 deeplearning-devcontainer/
 ├── .devcontainer/
 │   ├── gpu/
-│   │   └── devcontainer.json   # GPU dev container configuration
-│   └── cpu/
-│       └── devcontainer.json   # CPU dev container configuration
+│   │   └── devcontainer.json   # NVIDIA GPU dev container configuration
+│   ├── cpu/
+│   │   └── devcontainer.json   # CPU dev container configuration
+│   └── mac/
+│       └── devcontainer.json   # Mac (ARM64) dev container configuration
 ├── data/                       # Store datasets here
 ├── logs/                       # TensorBoard logs
 ├── models/                     # Saved model files
@@ -51,6 +62,12 @@ deeplearning-devcontainer/
 - **NVIDIA GPU** (Pascal or newer) with driver ≥570
 - **NVIDIA Container Toolkit** (Linux): [install guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 - Docker configured with GPU support
+
+### Mac configuration
+
+- **Docker Desktop for Mac** (Apple Silicon): [install guide](https://docs.docker.com/desktop/setup/install/mac-install/)
+
+> **Note:** GPU acceleration is not available inside Docker containers on Apple Silicon. Metal/MPS is a macOS-only framework with no Docker passthrough. The Mac configuration provides native ARM64 CPU performance.
 
 ### GPU compatibility
 
@@ -85,7 +102,7 @@ To quickly try the container environment out on your system do the following. If
 
 4. **Open Folder in Container** from the VS Code command palette (`Ctrl+Shift+P`), start typing `Open Folder in`...
 
-   > VS Code will prompt you to choose a devcontainer configuration. Select **DeepLearning GPU** if your machine has a compatible NVIDIA GPU, or **DeepLearning CPU** otherwise.
+   > VS Code will prompt you to choose a devcontainer configuration. Select **DeepLearning NVIDIA** if your machine has a compatible NVIDIA GPU, **DeepLearning Mac** if you're on Apple Silicon, or **DeepLearning CPU** otherwise.
 
 5. **Verify** by running `notebooks/environment_test.ipynb`
 
