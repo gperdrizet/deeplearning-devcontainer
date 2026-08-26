@@ -7,8 +7,6 @@
 	"name": "DeepLearning CPU",
 	"image": "gperdrizet/deeplearning-cpu",
     "runArgs": [
-		"--publish", "6006:6006",     // Map TensorBoard port for easy access
-		"--publish", "8080:8080",     // Map Optuna port for easy access
 		"--network=bridge"            // Explicitly use bridge network for internet access
 	],
 	"remoteUser": "vscode",         // Use the 'vscode' user provided by the base image

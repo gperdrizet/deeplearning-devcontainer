@@ -9,8 +9,6 @@
 	"image": "gperdrizet/deeplearning-mac",
     "runArgs": [
 		"--platform", "linux/arm64",  // Run as ARM64 image (native on Apple Silicon)
-		"--publish", "6006:6006",     // Map TensorBoard port for easy access
-		"--publish", "8080:8080",     // Map Optuna port for easy access
 		"--network=bridge"            // Explicitly use bridge network for internet access
 	],
 	"remoteUser": "vscode",           // Use the 'vscode' user provided by the base image
