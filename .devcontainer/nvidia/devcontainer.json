@@ -27,6 +27,7 @@
 
 		// Use 'settings' to set default VS code values on container create
 		"settings": {
+
 			// Set the default Python interpreter
 			"python.defaultInterpreterPath": "/usr/bin/python",
 			
