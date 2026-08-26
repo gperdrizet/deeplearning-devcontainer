@@ -55,7 +55,8 @@
 	"onCreateCommand": "mkdir -p logs && mkdir -p models && mkdir -p data",
 
 	// Use 'postCreateCommand' to run commands once after the container is created
-	"postCreateCommand": "pip install -r requirements.txt && mkdir -p logs && mkdir -p models && mkdir -p data",
+	// cpu extra index ensures pip resolves torchvision against a CPU wheel, preventing a torch version upgrade
+	"postCreateCommand": "pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu && mkdir -p logs && mkdir -p models && mkdir -p data",
 
 	// Use 'postAttachCommand' to run commands each time a user connects to the container
 	"postAttachCommand": ""

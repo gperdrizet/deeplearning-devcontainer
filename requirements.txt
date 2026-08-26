@@ -1,2 +1,2 @@
 sympy
-torchvision
+torchvision==0.20.1
