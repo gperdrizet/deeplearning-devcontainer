@@ -63,7 +63,7 @@
 
 	// Use 'postCreateCommand' to run commands once after the container is created
 	// cu124 extra index ensures pip resolves torchvision against a CUDA wheel, preventing a torch version upgrade
-	"postCreateCommand": "pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu124 && mkdir -p logs && mkdir -p models && mkdir -p data",
+	"postCreateCommand": "pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu126 && mkdir -p logs && mkdir -p models && mkdir -p data",
 
 	// Use 'postAttachCommand' to run TensorBoard
 	"postAttachCommand": ""
