@@ -5,7 +5,7 @@
 	// Based on NVIDIA TensorFlow 24.08 NGC image (TF 2.17.x, Python 3.10, pre-compiled Pascal kernels)
 	// See here: https://hub.docker.com/r/gperdrizet/deeplearning-nvidia
 	"name": "DeepLearning NVIDIA",
-	"image": "gperdrizet/deeplearning-nvidia:dev",
+	"image": "gperdrizet/deeplearning-nvidia",
     "runArgs": [
 		"--gpus", "device=0",         // Use only GPU 0
 		"--pid=host",                 // Use host PIDs, needed for nvidia-smi process list
