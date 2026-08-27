@@ -29,7 +29,7 @@
 		"settings": {
 
 			// Set the default Python interpreter
-			"python.defaultInterpreterPath": "/usr/bin/python",
+			"python.defaultInterpreterPath": "/usr/bin/python3",
 			
 			// Exclude other Python versions from Jupyter kernel list
 			"jupyter.kernels.excludePythonEnvironments": [

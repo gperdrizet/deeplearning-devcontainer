@@ -1,10 +1,10 @@
 # Deep learning development environment
 
 [![Sync release](https://github.com/gperdrizet/deeplearning-devcontainer/actions/workflows/sync-release.yml/badge.svg)](https://github.com/gperdrizet/deeplearning-devcontainer/actions/workflows/sync-release.yml)
-[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.11.0-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.17-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
-[![CUDA](https://img.shields.io/badge/CUDA-12.8-76B900?logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-toolkit)
+[![CUDA](https://img.shields.io/badge/CUDA-12.5-76B900?logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-toolkit)
 [![Docker Pulls deeplearning-nvidia](https://img.shields.io/docker/pulls/gperdrizet/deeplearning-nvidia?label=deeplearning-nvidia&logo=docker)](https://hub.docker.com/r/gperdrizet/deeplearning-nvidia)
 [![Docker Pulls deeplearning-cpu](https://img.shields.io/docker/pulls/gperdrizet/deeplearning-cpu?label=deeplearning-cpu&logo=docker)](https://hub.docker.com/r/gperdrizet/deeplearning-cpu)
 [![Docker Pulls deeplearning-mac](https://img.shields.io/docker/pulls/gperdrizet/deeplearning-mac?label=deeplearning-mac&logo=docker)](https://hub.docker.com/r/gperdrizet/deeplearning-mac)
@@ -18,7 +18,7 @@ A ready-to-use deep learning environment for VS Code, designed for AI/ML bootcam
 - [VS Code](https://code.visualstudio.com/) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 **NVIDIA GPU users** (also required)
-- NVIDIA driver ≥570 ([download](https://www.nvidia.com/Download/index.aspx))
+- NVIDIA driver ≥555 ([download](https://www.nvidia.com/Download/index.aspx))
 - [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) *(Linux only - not needed on Windows)*
 
 > **Mac users:** GPU acceleration (Metal/MPS) does not pass through to Docker containers. The Mac configuration uses native ARM64 CPU, no extra setup needed beyond Docker Desktop.
@@ -98,6 +98,24 @@ pip install <package-name>
 
 3. Rebuild the container (`Ctrl+Shift+P` → **Dev Containers: Rebuild Container**)
 
+### NVIDIA GPU container: installing PyTorch-compatible packages
+
+The NVIDIA container uses a **custom-built PyTorch wheel** compiled with wide GPU support. Packages that include PyTorch C++ extensions (such as `torchvision`, `torchaudio`, and similar) require special care — **pip's dependency resolver will try to replace the custom PyTorch with a standard PyPI build**, which breaks the GPU support and upgrades numpy in ways that break TensorFlow.
+
+Always use `--no-deps` when installing torch-adjacent packages at runtime, and install any missing pure-Python dependencies separately:
+
+```bash
+# Safe — does not replace torch or upgrade numpy
+pip install --no-deps torchvision==0.20.1+cu124 --extra-index-url https://download.pytorch.org/whl/cu124
+pip install pillow  # install torchvision's only non-torch dependency separately
+```
+
+**Do not** use `--force-reinstall` or omit `--no-deps` — this will download a 900 MB standard torch wheel and break TensorFlow.
+
+For permanent additions, the safest approach is to add the package to the Docker image rather than installing at runtime.
+
+Plain Python packages (NumPy, pandas, matplotlib, etc.) are not affected — install those normally.
+
 ## TensorBoard
 
 To launch TensorBoard:
@@ -128,28 +146,28 @@ git fetch upstream && git merge upstream/main
 
 | Category | Details |
 |----------|---------|
-| **Base image** | `nvcr.io/nvidia/tensorflow:25.02-tf2-py3` |
-| **GPU** | CUDA 12.8, cuDNN 9.7, CuPy 13.6 |
-| **ML frameworks** | PyTorch 2.11, TensorFlow 2.17, Keras 3.3 |
-| **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
+| **Base image** | `nvcr.io/nvidia/tensorflow:24.08-tf2-py3` |
+| **GPU** | CUDA 12.5, cuDNN 9 |
+| **ML frameworks** | PyTorch 2.5.1, TensorFlow 2.17, Keras 3 |
+| **Python** | 3.10, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
 | **Tools** | JupyterLab, TensorBoard, Optuna, Plotly, python-dotenv |
 
 ### CPU environment
 
 | Category | Details |
 |----------|---------|
-| **Base image** | `python:3.12-slim` |
-| **ML frameworks** | PyTorch 2.11 (CPU), TensorFlow 2.17 |
-| **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
+| **Base image** | `python:3.10-slim` |
+| **ML frameworks** | PyTorch 2.5.1 (CPU), TensorFlow 2.17 |
+| **Python** | 3.10, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
 | **Tools** | JupyterLab, TensorBoard, Optuna, Plotly, python-dotenv |
 
 ### Mac environment
 
 | Category | Details |
 |----------|---------|
-| **Base image** | `python:3.12-slim` (linux/arm64) |
-| **ML frameworks** | PyTorch 2.11 (ARM64, from PyPI), TensorFlow 2.17 |
-| **Python** | 3.12, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
+| **Base image** | `python:3.10-slim` (linux/arm64) |
+| **ML frameworks** | PyTorch 2.5.1 (ARM64, from PyPI), TensorFlow 2.17 |
+| **Python** | 3.10, NumPy 1.26, Pandas 2.2, Scikit-learn 1.5 |
 | **Tools** | JupyterLab, TensorBoard, Optuna, Plotly, python-dotenv |
 
 ## GPU compatibility (NVIDIA)

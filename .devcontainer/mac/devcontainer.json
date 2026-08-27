@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
 	// Container definition for deeplearning development environment (Mac / Apple Silicon)
-	// Based on python:3.12-slim, built as linux/arm64. Runs natively on M1/M2/M3 Macs
+	// Based on python:3.10-slim, built as linux/arm64. Runs natively on M1/M2/M3 Macs
 	// via Docker Desktop — no Rosetta emulation. No GPU acceleration (Metal/MPS not
 	// accessible inside Docker containers).
 	// See here: https://hub.docker.com/r/gperdrizet/deeplearning-mac
